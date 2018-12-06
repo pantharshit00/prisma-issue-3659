@@ -1,0 +1,13 @@
+endpoint: https://internal.example.com/example-api/${self:custom.name}
+datamodel: datamodel.prisma
+secret: ${self:custom.endpoint-secret}
+
+generate:
+  - generator: typescript-client
+    output: ../src/generated/prisma-client/
+  - generator: graphql-schema
+    output: ../src/generated/prisma-client/
+
+custom:
+  endpoint-secret: ${env:PRISMA_ENDPOINT_SECRET}
+  name: ${env:PRISMA_DEPLOYMENT_UID}
